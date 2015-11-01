@@ -6,7 +6,7 @@ using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 using Microsoft.Framework.DependencyInjection;
 
-namespace FabMovieAngularPart1
+namespace FavoriteMoviesAngular
 {
     public class Startup
     {

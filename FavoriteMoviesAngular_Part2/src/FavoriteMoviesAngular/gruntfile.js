@@ -4,11 +4,20 @@ Click here to learn more. http://go.microsoft.com/fwlink/?LinkID=513275&clcid=0x
 */
 module.exports = function (grunt) {
     // load Grunt plugins from NPM
+    grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     // configure plugins
     grunt.initConfig({
+        copy: {
+            files: {
+                cwd: 'Views/',
+                src: ['**/*.html'],
+                dest: 'wwwroot',
+                expand: true
+            }
+        },
         uglify: {
             options: {
                 mangle: false
@@ -20,8 +29,8 @@ module.exports = function (grunt) {
 
         watch: {
             scripts: {
-                files: ['Scripts/**/*.js'],
-                tasks: ['uglify']
+                files: ['Scripts/**/*.js', 'Views/**/*.html'],
+                tasks: ['uglify', 'copy']
             }
         }
     });

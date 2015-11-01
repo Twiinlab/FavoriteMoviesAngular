@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FabMovieAngularPart1.Models
+namespace FavoriteMoviesAngular.Models
 {
     public class Movie
     {
