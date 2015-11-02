@@ -11,32 +11,36 @@ namespace FavoriteMoviesAngular.API
     [Route("api/[controller]")]
     public class MoviesController : Controller
     {
+        static private List<Movie> movielist = new List<Movie>();
+
+        public MoviesController()
+        {
+            if(movielist.Count == 0){
+                movielist.Add(new Movie { Id = 0, Title = "Star Wars", Director = "Lucas" });
+                movielist.Add(new Movie { Id = 1, Title = "King Kong", Director = "Jackson" });
+                movielist.Add(new Movie { Id = 2, Title = "Memento", Director = "Nolan" });
+            }
+        }
+
         [HttpGet]
         public IEnumerable<Movie> Get()
         {
-            return new List<Movie> {
-                new Movie {Id=1, Title="Star Wars", Director="Lucas"},
-                new Movie {Id=2, Title="King Kong", Director="Jackson"},
-                new Movie {Id=3, Title="Memento", Director="Nolan"}
-            };
+            return movielist;
         }
 
 
         [HttpGet("{id:int}")]
         public IActionResult Get(int id)
         {
-            return new ObjectResult(new Movie
-            {
-                Id = 1,
-                Title = "Star Wars",
-                Director = "Lucas"
-            });
+            return new ObjectResult(movielist[id]);
         }
 
 
         [HttpPost]
         public IActionResult Post([FromBody]Movie movie)
         {
+            movie.Id = movielist.Count;
+            movielist.Add(movie);
             return new ObjectResult(movie);
         }
 
@@ -44,9 +48,8 @@ namespace FavoriteMoviesAngular.API
         [HttpDelete("{id:int}")]
         public IActionResult Delete(int id)
         {
+            movielist.RemoveAt(id);
             return new HttpStatusCodeResult(200);
         }
-
-
     }
 }
