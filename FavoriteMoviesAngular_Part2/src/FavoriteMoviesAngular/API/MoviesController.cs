@@ -35,6 +35,12 @@ namespace FavoriteMoviesAngular.API
             return new ObjectResult(movielist[id]);
         }
 
+        [HttpPut("{id:int}")]
+        public IActionResult Put(int id, [FromBody]Movie movie)
+        {
+            movielist[movie.Id] = movie;
+            return new ObjectResult(movie);
+        }
 
         [HttpPost]
         public IActionResult Post([FromBody]Movie movie)

@@ -9,5 +9,10 @@
 
     function Movie($resource) {
         return $resource('/api/movies/:id');
+
     }
+
+
+
+
 })();

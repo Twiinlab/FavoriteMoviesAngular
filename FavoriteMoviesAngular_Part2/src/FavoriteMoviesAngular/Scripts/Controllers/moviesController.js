@@ -28,12 +28,14 @@
     }
 
     /* Movies Edit Controller */
-    MoviesEditController.$inject = ['$scope', '$routeParams', '$location', 'Movie'];
+    MoviesEditController.$inject = ['$scope', '$routeParams', '$location', '$http', 'Movie'];
 
-    function MoviesEditController($scope, $routeParams, $location, Movie) {
+    function MoviesEditController($scope, $routeParams, $location, $http, Movie) {
         $scope.movie = Movie.get({ id: $routeParams.id });
         $scope.edit = function () {
-            $scope.movie.$save(function () {
+            $http.put('/api/movies/' + $scope.movie.Id, $scope.movie).success(function (data, status, headers, config) {
+                $location.path('/');
+            }).error(function (response, status, headers, config) {
                 $location.path('/');
             });
         };
