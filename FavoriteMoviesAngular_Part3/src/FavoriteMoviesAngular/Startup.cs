@@ -14,6 +14,9 @@ namespace FavoriteMoviesAngular
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddSwagger();
+
         }
 
         public void Configure(IApplicationBuilder app)
@@ -24,6 +27,10 @@ namespace FavoriteMoviesAngular
             //app.UseDefaultFiles();
 
             app.UseMvc();
+
+            app.UseSwagger();
+            app.UseSwaggerUi();
+
         }
 
     }
